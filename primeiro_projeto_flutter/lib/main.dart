@@ -42,6 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
+  void somaDosContadores() {
+    var msg = "$_counter somando com $_counter2 é: ${_counter + _counter2}";
+    print(msg);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
               'Contagem _counter2: ${_counter2}',
               style: Theme.of(context).textTheme.headline4,
             ),
+            TextButton(
+              onPressed: _incrementCounter2,
+              child: Text("Conta 2"),
+            ),
+            TextButton(
+                onPressed: somaDosContadores, child: Icon(Icons.plus_one)),
           ],
         ),
       ),
@@ -67,7 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.access_alarm), title: Text("Ola")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.access_alarm), title: Text("Ola")),
+        ],
+      ),
     );
   }
 }
