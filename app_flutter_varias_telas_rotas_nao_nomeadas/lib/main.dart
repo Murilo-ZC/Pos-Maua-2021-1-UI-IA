@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'segunda_tela.dart';
+import 'terceira_tela.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -27,9 +30,27 @@ class PrimeiraPagina extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              MeuBotao("Mudar Para Segundo Tela", () {}),
-              MeuTexto("Colocar Texto Aqui", controlador),
-              MeuBotao("Mudar Para Terceira Tela com o Texto Acima!", () {}),
+              MeuBotao(
+                "Patinhas - Vai para Segunda Tela",
+                () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SegundaTela();
+                  }));
+                },
+              ),
+              MeuTexto("Uguinho", controlador),
+              MeuBotao("Mudar Para Terceira Tela com o Texto Acima!", () async {
+                var resposta = await Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return TerceiraTela(controlador.text);
+                  },
+                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("${resposta ?? "Sem retorno"}"),
+                  ),
+                );
+              }),
             ],
           ),
         ),

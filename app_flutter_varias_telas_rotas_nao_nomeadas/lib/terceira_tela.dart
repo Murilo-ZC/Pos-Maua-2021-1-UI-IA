@@ -21,8 +21,13 @@ class _TerceiraTelaState extends State<TerceiraTela> {
         child: Column(
           children: [
             MeuTexto("Texto para voltar para a tela principal", controlador),
-            MeuBotao("Voltar para tela principal com o texto acima", () {}),
-            MeuBotao("Apenas voltar para tela principal", () {}),
+            MeuBotao("Voltar para tela principal com o texto acima", () {
+              Navigator.pop(context, controlador.text);
+            }),
+            MeuBotao("Apenas voltar para tela principal", () {
+              Navigator.pop(context);
+            }),
+            Text(widget.textoRecebido),
           ],
         ),
       ),
