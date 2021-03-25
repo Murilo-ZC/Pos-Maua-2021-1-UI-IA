@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:list_view_intro/models/heroi.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var nomeController = TextEditingController();
   var nomeSecretoController = TextEditingController();
+  final _listaDeHerois = <Heroi>[];
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +22,38 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             EntradaDeDados(nomeController, "Nome de Herói - Batman"),
             EntradaDeDados(nomeSecretoController, "Nome do Alter Ego - Bruce"),
-            ExibeListView(),
+            ExibeListView(_listaDeHerois),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          _listaDeHerois.add(
+            Heroi(nomeController.text, nomeSecretoController.text),
+          );
+          print(_listaDeHerois);
+        },
       ),
     );
   }
 }
 
 class ExibeListView extends StatelessWidget {
+  final listaParaExibir;
+
+  const ExibeListView(this.listaParaExibir);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return listaParaExibir.isEmpty
+        ? Text("Nada para exibir")
+        : ListView.builder(
+            itemCount: listaParaExibir.length,
+            itemBuilder: (context, index) {
+              return Text("${listaParaExibir[index]}");
+            },
+          );
   }
 }
 
