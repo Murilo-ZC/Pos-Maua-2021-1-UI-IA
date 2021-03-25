@@ -6,6 +6,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var nomeController = TextEditingController();
+  var nomeSecretoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            EntradaDeDados(),
-            EntradaDeDados(),
+            EntradaDeDados(nomeController, "Nome de Herói - Batman"),
+            EntradaDeDados(nomeSecretoController, "Nome do Alter Ego - Bruce"),
             ExibeListView(),
           ],
         ),
@@ -37,8 +40,21 @@ class ExibeListView extends StatelessWidget {
 }
 
 class EntradaDeDados extends StatelessWidget {
+  final TextEditingController _controlador;
+  final String _textoHint;
+
+  const EntradaDeDados(this._controlador, this._textoHint);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: TextField(
+          controller: _controlador,
+          decoration: InputDecoration(hintText: _textoHint),
+        ),
+      ),
+    );
   }
 }
