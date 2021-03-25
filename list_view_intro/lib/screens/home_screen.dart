@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:list_view_intro/models/heroi.dart';
+import 'package:list_view_intro/screens/detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -74,6 +75,11 @@ class ItemDoListView extends StatelessWidget {
       title: Text(_heroi.nome),
       leading: Icon(Icons.headset),
       subtitle: Text(_heroi.alterEgo),
+      onTap: () {
+        //print(_heroi);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DetailScreen(_heroi)));
+      },
     );
   }
 }
