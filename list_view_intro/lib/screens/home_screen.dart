@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Heroi(nomeController.text, nomeSecretoController.text),
           );
           print(_listaDeHerois);
+          setState(() {});
         },
       ),
     );
@@ -46,14 +47,34 @@ class ExibeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return listaParaExibir.isEmpty
-        ? Text("Nada para exibir")
-        : ListView.builder(
-            itemCount: listaParaExibir.length,
-            itemBuilder: (context, index) {
-              return Text("${listaParaExibir[index]}");
-            },
-          );
+    return Expanded(
+      flex: 10,
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: listaParaExibir.isEmpty
+            ? Text("Nada para exibir")
+            : ListView.builder(
+                itemCount: listaParaExibir.length,
+                itemBuilder: (context, index) {
+                  return ItemDoListView(listaParaExibir[index]);
+                },
+              ),
+      ),
+    );
+  }
+}
+
+class ItemDoListView extends StatelessWidget {
+  final Heroi _heroi;
+  ItemDoListView(this._heroi);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(_heroi.nome),
+      leading: Icon(Icons.headset),
+      subtitle: Text(_heroi.alterEgo),
+    );
   }
 }
 
